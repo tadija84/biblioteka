@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>NARODNA BIBLIOTEKA SRBIJE</header>
+  <div id="container">
+    <div id="zaPretragu">
+    </div>
+    <div id="logovanjeBibliotekara">
+      <label for="imeBibliotekara">Unesite ime</label>
+      <input type="text" id="imeBibliotekara"><br>
+      <label for="sifraBibliotekara">Unesite sifru</label>
+      <input type="text" id="sifraBibliotekara"><br>
+      <button id="logovanjeBibliotekara">Uloguj se</button>
+    </div>
+    <hr>
+    <div id="profilBibliotekara">
+      <h3>Profil bibliotekara</h3>
+      <button id="idiNaPromenuSifre">Promeni sifru</button>
+      <button id="linkNaUnosKnjiga">Unesi knjigu</button>
+      <button id="linkNaRadSaKorisnicima">Rad sa korisnicima</button>
+      <button id="izlogujSe">Izloguj se</button>
+    </div>
+    <hr>
+    <div id="divPromenaSifre">
+      <h3>promena sifre bibliotekara</h3>
+      <label for="staraSifraBibliotekara">Unesi staru sifru</label>
+      <input type="text" id="staraSifraBibliotekara"><br>
+      <label for="novaSifraBibliotekara">Unesi novu sifru</label>
+      <input type="text" id="novaSifraBibliotekara"><br>
+      <label for="potvrdaNoveSifreBibliotekara">Potvrdi novu sifru</label>
+      <input type="text" id="potvrdaNoveSifreBibliotekara">
+    </div>
+    <hr>
+    <div id="unosNoveKnjige">
+      <h3>Unos nove knjige</h3>
+      <input type="text" id="IDNoveKnjige" name="IDNoveKnjige"> <br>
+      <input type="text" id="imeNoveKnjige" name="imeNoveKnjige"><br>
+      <input type="text" id="imePiscaNoveKnjige" name="imePiscaNoveKnjige"><br>
+      <input type="text" id="izdavacNoveKnjige" name="izdavacNoveKnjige"><br>
+      <input type="text" id="godinaIzdanjaNoveKnjige" name="godinaIzdanjaNoveKnjige"><br>
+      <input type="text" id="zanrNoveKnjige" name="zanrNoveKnjige"><br>
+
+      <button id="unesiNovuKnjigu">Unesi</button>
+    </div>
+    <div id="radSaKorisnicima">
+      <h3>rad sa korisnicima</h3>
+      <label for="potraziKorisnikaPoID">Potrazi korisnika po ID</label>
+      <input type="text" id="potraziKorisnikaPoID"><br>
+      <button id="dugmePotraziKorisnikaPoID"></button>
+      <label for="potraziKorisnikaPoImenu"></label>
+      <input type="text" id="potraziKorisnikaPoImenu"><br>
+      <button id="dugmePotraziKorisnikaPoImenu"></button>
+      <div id="divZaPrikazPretrageKorisnika"></div>
+    </div>
+  </div>
+  <br>
+  <hr>
+
+  <footer>
+
+  </footer>
+
+
+  <script src="bibliotekar.js"></script>
+
+</body>
+
+</html>
