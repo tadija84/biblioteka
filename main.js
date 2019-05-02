@@ -20,6 +20,7 @@ document.getElementById("zanrRatni").addEventListener("click", prikazKnjigaPoZan
 document.getElementById("zanrUdzbenik").addEventListener("click", prikazKnjigaPoZanruUdzbenik);
 document.getElementById("zanrPoezija").addEventListener("click", prikazKnjigaPoZanruPoezija);
 document.getElementById("zanrOstalo").addEventListener("click", prikazKnjigaPoZanruOstalo);
+document.getElementById("pretragaKnjiga").addEventListener("click", potragaZaKnjigom);
 /*var divElementSaZanromKnjige = document.getElementsByClassName("zanrOpcija");
 for (var i = 0; i < divElementSaZanromKnjige.length; i++) {
     divElementSaZanromKnjige[i].addEventListener("click", function () {
@@ -162,31 +163,31 @@ function logLink() {
 }
 function prikazLogStranice() {
     document.getElementById("zaLogovanje").style.display = "block";
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "registracijaKorisnika", "podaciOKnjigamaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "registracijaKorisnika", "podaciOKnjigamaKorisnika"]);
 }
 function prikazRegStranice() {
     document.getElementById("registracijaKorisnika").style.display = "block";
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "podaciOKnjigamaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "podaciOKnjigamaKorisnika"]);
 }
 function IDKorisnika(id) {
     document.getElementById("tekstIDKorisnika").innerHTML = "Cestitamo, uspesno ste se registrovali. Vas ID je" + id + "Zabelezite ovaj ID jer cete uz njegovu pomoc moci da pristupate nalogu.";
     document.getElementById("IDsifraKorisnika").style.display = "block";
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "podaciOKnjigamaKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "podaciOKnjigamaKorisnika", "registracijaKorisnika"]);
 }
 function prikazProfilaNovogKorisnika() {
     var ulogovan = koJeUlogovan();
     document.getElementById("podaciOKnjigamaKorisnika").style.display = "block";
-    hideDivs(["zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","container", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
 }
 function prikazNaslovneStranice() {
     document.getElementById("container").style.display = "block";
-    hideDivs(["zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
 }
 function knjigeNaNaslovnoj() {
     pozivanjeAjaksa("POST", prikaziNaslovneKnjige, "knjige.json");
 }
 function prikaziNaslovneKnjige(sveKnjige) {
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazNaslovna").style.display = "block";
     document.getElementById("zaPrikazNaslovna").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -211,7 +212,7 @@ function knjigeNaNaslovnojPopularno() {
     pozivanjeAjaksa("POST", prikaziPopularneKnjige, "knjige.json");
 }
 function prikaziPopularneKnjige(sveKnjige) {
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPopularno").style.display = "block";
     document.getElementById("zaPrikazPopularno").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -240,7 +241,7 @@ function knjigeNaNaslovnojNobelovci() {
     pozivanjeAjaksa("POST", prikaziKnjigeNobelovaca, "knjige.json");
 }
 function prikaziKnjigeNobelovaca(sveKnjige) {
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazNobelovci").style.display = "block";
     document.getElementById("zaPrikazNobelovci").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -270,7 +271,7 @@ function knjigeNaNaslovnojNovo() {
     pozivanjeAjaksa("POST", prikaziNoveKnjige, "knjige.json");
 }
 function prikaziNoveKnjige(sveKnjige) {
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazNovo").style.display = "block";
     document.getElementById("zaPrikazNovo").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -300,7 +301,7 @@ function knjigeNaNaslovnojNagradjivano() {
     pozivanjeAjaksa("POST", prikaziNagradjeneKnjige, "knjige.json");
 }
 function prikaziNagradjeneKnjige(sveKnjige) {
-    hideDivs(["zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruSF","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazNagradjivano").style.display = "block";
     document.getElementById("zaPrikazNagradjivano").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -337,7 +338,7 @@ function prikazKnjigaPoZanruSF() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraSF, "knjige.json");
 }
 function prikaziKnjigeZanraSF(sveKnjige) {
-    hideDivs(["zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruSF").style.display = "block";
     document.getElementById("zaPrikazPoZanruSF").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -365,7 +366,7 @@ function prikazKnjigaPoZanruRoman(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraRoman, "knjige.json");
 }
 function prikaziKnjigeZanraRoman(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruRoman").style.display = "block";
     document.getElementById("zaPrikazPoZanruRoman").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -393,7 +394,7 @@ function prikazKnjigaPoZanruLjubavni(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraLjubavni, "knjige.json");
 }
 function prikaziKnjigeZanraLjubavni(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruLjubavni").style.display = "block";
     document.getElementById("zaPrikazPoZanruLjubavni").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -421,7 +422,7 @@ function prikazKnjigaPoZanruIstorija(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraIstorija, "knjige.json");
 }
 function prikaziKnjigeZanraIstorija(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruIstorija").style.display = "block";
     document.getElementById("zaPrikazPoZanruIstorija").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -448,7 +449,7 @@ function prikazKnjigaPoZanruRatni(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraRatni, "knjige.json");
 }
 function prikaziKnjigeZanraRatni(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruRatni").style.display = "block";
     document.getElementById("zaPrikazPoZanruRatni").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -475,7 +476,7 @@ function prikazKnjigaPoZanruUdzbenik(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraUdzbenik, "knjige.json");
 }
 function prikaziKnjigeZanraUdzbenik(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruPoezija","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruUdzbenik").style.display = "block";
     document.getElementById("zaPrikazPoZanruUdzbenik").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -502,7 +503,7 @@ function prikazKnjigaPoZanruPoezija(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraPoezija, "knjige.json");
 }
 function prikaziKnjigeZanraPoezija(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruOstalo","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruPoezija").style.display = "block";
     document.getElementById("zaPrikazPoZanruPoezija").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -529,7 +530,7 @@ function prikazKnjigaPoZanruOstalo(){
     pozivanjeAjaksa("POST", prikaziKnjigeZanraPoezija, "knjige.json");
 }
 function prikaziKnjigeZanraOstalo(sveKnjige){
-    hideDivs(["zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["prikazOdredjeneKnjige","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruOstalo").style.display = "block";
     document.getElementById("zaPrikazPoZanruOstalo").innerHTML="";
     for (var i = 0; i < sveKnjige.length; i++) {
@@ -551,4 +552,33 @@ function prikaziKnjigeZanraOstalo(sveKnjige){
             document.getElementById("zaPrikazPoZanruOstalo").appendChild(noviDivKnjige);
         }
     }
+}
+function potragaZaKnjigom(){
+    pozivanjeAjaksa("POST", prikaziTrazenuKnjigu, "knjige.json");
+}
+function prikaziTrazenuKnjigu(sveKnjige){
+    hideDivs(["zaPrikazPoZanruOstalo","zaPrikazPoZanruSF","zaPrikazNagradjivano","zaPrikazNobelovci","zaPrikazNovo","zaPrikazPoZanruRoman","zaPrikazPoZanruLjubavni","zaPrikazPoZanruIstorija","zaPrikazPoZanruRatni","zaPrikazPoZanruUdzbenik","zaPrikazPoZanruPoezija","zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    document.getElementById("prikazOdredjeneKnjige").style.display = "block";
+
+    var knjigaKojaSeTrazi=document.getElementById("trazenaKnjiga").value;
+for(var i=0; i<sveKnjige.length;i++){
+    if (sveKnjige[i].imeKnjige == knjigaKojaSeTrazi ||sveKnjige[i].imePisca==knjigaKojaSeTrazi) {
+        console.log(knjigaKojaSeTrazi)
+        var noviDivKnjige = document.createElement("div");
+        noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+        var imeKnjigeDiva = document.createElement("p");
+        imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
+        var pisacKnjigeDiva = document.createElement("p");
+        pisacKnjigeDiva.innerHTML = sveKnjige[i].imePisca;
+        var idKnjigeDiva = document.createElement("p");
+        idKnjigeDiva.innerHTML = sveKnjige[i].id;
+        var zanrKnjigeDiva = document.createElement("p");
+        zanrKnjigeDiva.innerHTML = sveKnjige[i].zanr;
+        noviDivKnjige.appendChild(imeKnjigeDiva);
+        noviDivKnjige.appendChild(pisacKnjigeDiva);
+        noviDivKnjige.appendChild(idKnjigeDiva);
+        noviDivKnjige.appendChild(zanrKnjigeDiva);
+        document.getElementById("prikazOdredjeneKnjige").appendChild(noviDivKnjige);
+    }
+}
 }
