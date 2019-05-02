@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Biblioteka</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo"></div>
+        <h2>NARODNA BIBLIOTEKA SRBIJE</h2>
+        <div id="linkLog">
+            <p id="paraLinkLog">Uloguj se</p>
+            </section>
+        </div>
+    </header>
+    <div id="container">
+        <div id="zaPretragu">
+            <input type="text" placeholder="Pretrazite" id="trazenaKnjiga">
+            <button id="pretragaKnjiga">Pretrazi</button>
+        </div>
+        <aside id="left">
+            <div id="pocetnaLink">
+                <p>POCETNA</p>
+            </div>
+            <div id="knjigeZanr">
+                <p>PRETRAGA PO ZANRU</p>
+            </div>
+            <div name="odabirZanra" id="odabirZanra">
+                <p value="naucna fantastika" class="zanrOpcija" id="SFzanr">Naucna fantastika</p>
+                <p value="roman" class="zanrOpcija" id="zanrRoman">Roman</p>
+                <p value="ljubavni" class="zanrOpcija" id="zanrLjubavni">Ljubavni roman</p>
+                <p value="istorija" class="zanrOpcija" id="zanrIstorija">Istorija</p>
+                <p value="ratni" class="zanrOpcija" id="zanrRatni">Ratni roman</p>
+                <p value="udzbenik" class="zanrOpcija" id="zanrUdzbenik">Udzbenici</p>
+                <p value="poezija" class="zanrOpcija" id="zanrPoezija">Poezija</p>
+                <p value="ostalo" class="zanrOpcija" id="zanrOstalo">Ostalo</p>
+            </div>
+            <div id="knjigePopularno">
+                <p>POPULARNO</p>
+            </div>
+            <div id="knjigeNovo">
+                <p>NOVO</p>
+            </div>
+            <div id="knjigeNobelovci">
+                <p>NOBELOVCI</p>
+            </div>
+            <div id="knjigeNagradjivano">
+                <p>NAGRADJIVANO</p>
+            </div>
+        </aside>
+        <div id="zaPrikaz">
+            <div id="kaoMeniNaPocetnoj">
+                <button>Popularno</button><button>Abecedno</button>
+            </div>
+            <div id="zaPrikazNaslovna"></div>
+            <div id="zaPrikazPopularno"></div>
+            <div id="zaPrikazNobelovci"></div>
+            <div id="zaPrikazNovo"></div>
+            <div id="zaPrikazNagradjivano"></div>
+            <div id="zaPrikazPoZanruSF"></div>
+            <div id="zaPrikazPoZanruRoman"></div>
+            <div id="zaPrikazPoZanruLjubavni"></div>
+            <div id="zaPrikazPoZanruIstorija"></div>
+            <div id="zaPrikazPoZanruRatni"></div>
+            <div id="zaPrikazPoZanruUdzbenik"></div>
+            <div id="zaPrikazPoZanruPoezija"></div>
+            <div id="zaPrikazPoZanruOstalo"></div>
+        </div>
+        <div id="prikazOdredjeneKnjige"></div>
+    </div>
+    <div id="zaLogovanje">
+        <div id="omotZaLog">
+            <label for="idKorisnika">Vas id</label>
+            <input type="text" id="idKorisnika"><br>
+            <label for="sifraKorisnika">Sifra</label>
+            <input type="text" id="sifraKorisnika">
+            <button id="ulogujMe">Uloguj me</button><br>
+            <p id="linkRegistracija">Nemate nalog? Registrujte se.</p>
+        </div>
+    </div>
+    <div id="registracijaKorisnika">
+        <label for="imeNovogKorisnika">Ime</label>
+        <input type="text" id="imeNovogKorisnika"><br>
+        <label for="prezimeNovogKorisnika">Prezime</label>
+        <input type="text" id="prezimeNovogKorisnika"><br>
+        <label for="brojTelefonaNovogKorisnika">Broj telefona</label>
+        <input type="text" id="brojTelefonaNovogKorisnika"><br>
+        <label for="mejlNovogKorisnika">email</label>
+        <input type="text" id="mejlNovogKorisnika"><br>
+        <label for="jmbgNovogKorisnika">JMBG ili broj licne karte</label>
+        <input type="text" id="jmbgNovogKorisnika"><br>
+        <label for="sifraNovogKorisnika">Odaberi sifru</label>
+        <input type="text" id="sifraNovogKorisnika"><br>
+        <label for="potvrdjenaSifraNK">Potvrdi sifru</label>
+        <input type="text" id="potvrdjenaSifraNK"><br>
+        <button id="potvrdiNovogKorisnika">Potvrdi</button><br>
+        <!-- <input type="text" id="IDNovogKorisnika" placeholder="*********">-->
+        <p id="ipakImamNalog">Imate nalog</p>
+    </div>
+    <div id="IDsifraKorisnika">
+        <p id="tekstIDKorisnika"></p>
+        <button id="idiNaMojProfil">Dalje</button>
+    </div>
+    <div id="podaciOKnjigamaKorisnika">
+        <div id="triNizaPodataka">
+            <!--ovde mozda staviti dugmad-->
+            <div class="jedanOdTriNiza" id="uzeteKnjige">Uzete</div>
+            <div class="jedanOdTriNiza" id="nevraceneKnjige">Nevracene</div>
+            <div class="jedanOdTriNiza" id="clanarina">Clanarina</div>
+        </div>
+        <div></div>
+        <div class="knjigaKorisnika">knjiga1</div>
+        <div class="knjigaKorisnika">knjiga2</div>
+        <div class="knjigaKorisnika">knjiga3</div>
+        <div class="knjigaKorisnika">knjiga3</div>
+        <div class="knjigaKorisnika">knjiga4</div>
+    </div>
+    <button id="prikaziProfil">Prikazi profil</button>
+    <footer>
+
+    </footer>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
