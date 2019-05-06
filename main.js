@@ -679,7 +679,7 @@ function prikazUzetihKnjiga(sviKorisnici) {
                 if (sviKorisnici[i].id == ulogovan) {
                     document.getElementById("uzeteKnjigeKorisnika").style.display = "block";
                     document.getElementById("uzeteKnjigeKorisnika").innerHTML = "";
-                    hideDivs(["nevraceneKnjigeKorisnika", "vraceneKnjigeKorisnika", "rezervisaneKnjige", "clanarina"]);
+                    hideDivs(["nevraceneKnjigeKorisnika", "vraceneKnjige", "rezervisaneKnjige", "clanarina"]);
                     if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige == undefined || sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length == 0) {
                         var divZaUKnjigu = document.createElement("div");
                         var povratniTekst = document.createElement("p");
