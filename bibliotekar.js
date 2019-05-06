@@ -9,18 +9,7 @@ document.getElementById("linkNaUnosKnjiga").addEventListener("click", idiNaUnosK
 document.getElementById("linkNaRadSaKorisnicima").addEventListener("click", idiNaRadSaKorisnicima);
 document.getElementById("idiNaUnosNB").addEventListener("click", idiNaUnosNovogB);
 document.getElementById("dugmePotraziKorisnikaPoImenu").addEventListener("click", pozivPretragePoImenu);
-/*function pozivanjeAjaksa(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var podaci = xhttp.responseText;
-            var knjige = JSON.parse(podaci);
-           unosNoveKnjige(knjige);         
-        }
-    };
-    xhttp.open("GET", "knjige.json", true);
-    xhttp.send();  
-}*/
+
 window.onload = function (e) {
     if (koJeUlogovan() != null) {
         idiNaProfilBibliotekara();
@@ -48,27 +37,75 @@ function pozivanjeAjaksa(metoda, funkcija, fajlSaPodacima) {
 }
 function unosNoveKnjige(x) {
     var imeKnjige = document.getElementById("imeNoveKnjige").value;
-    var idKnjige = document.getElementById("IDNoveKnjige").value;
     var imePisca = document.getElementById("imePiscaNoveKnjige").value;
     var izdavacK = document.getElementById("izdavacNoveKnjige").value;
     var godinaIzdanja = document.getElementById("godinaIzdanjaNoveKnjige").value;
-    var zanrK = document.getElementById("zanrNoveKnjige").value;
+    //var zanrK = document.getElementById("zanrNoveKnjige").value;
     var xmr = new XMLHttpRequest;
     var duzinaNiza = x.length;
+    var noviIDKnjige = kreiranjeIDKnjige(duzinaNiza, imeKnjige, imePisca, izdavacK, godinaIzdanja);
+    var unosZaPopularno = document.getElementById("novaKnjigaPoPularno");
+    var popularno;
+    if (unosZaPopularno.checked) {
+        popularno = true;
+    } else {
+        popularno = false;
+    }
+    var unosZaNobela = document.getElementById("nobelovac");
+    var nobelovac;
+    if (unosZaNobela.checked) {
+        nobelovac = true;
+    } else {
+        nobelovac = false;
+    }
+    var unosZaNovo = document.getElementById("novo");
+    var knjigaNovo;
+    if (unosZaNovo.checked) {
+        knjigaNovo = true;
+    } else {
+        knjigaNovo = false;
+    } 
+    var unosZaNagradjivano = document.getElementById("ostaleNagrade");
+    var nagradjivano;
+    if (unosZaNagradjivano.checked) {
+        nagradjivano = true;
+    } else {
+        nagradjivano = false;
+    }
+    var radios = document.getElementsByName('zanrNoveKnjige');
+var zanrK;
+    for (var i = 0, length = radios.length; i < length; i++)
+    {
+     if (radios[i].checked)
+     {
+      zanrK=radios[i].value;
+    
+      // only one radio can be logically checked, don't check the rest
+      break;
+     }
+    }
     x[duzinaNiza] = {
-        id: idKnjige,
+        id: noviIDKnjige,
         imeKnjige: imeKnjige,
         imePisca: imePisca,
         izdavac: izdavacK,
         godinaIzdanja: godinaIzdanja,
-        zanr: zanrK
+        zanr: zanrK,
+        popularno: popularno,
+        nobelovac: nobelovac,
+        novo: knjigaNovo,
+        nagradjivano: nagradjivano
     };
     prikazi(x);
     var nesto = JSON.stringify(x);
     xmr.open("POST", "biblioteka.php?q=" + nesto, true);
     xmr.send();
 }
-
+function kreiranjeIDKnjige(duzinaNiza, imeKnjige, imePisca, izdavacK, godinaIzdanja) {
+    var imeSifra = "";
+    imesifra = duzinaNiza + imeKnjige[0] + imePisca[0] + godinaIzdanja + izdavacK[0];
+    return imeSifra;
+}
 function prikazi(x) {
     console.log(x);
 }
@@ -179,11 +216,12 @@ function idiNaUnosNovogB() {
 function pozivPretragePoImenu() {
     pozivanjeAjaksa("POST", pretragaKorisnikaPoImenu, "korisnici.json");
 }
+
 function pretragaKorisnikaPoImenu(sviKorisnici) {
     var trazeniKor = document.getElementById("potraziKorisnikaPoImenu").value;
     document.getElementById("divZaPrikazPretrageKorisnika").innerHTML = ""
     for (var i = 0; i < sviKorisnici.length; i++) {
-        if (sviKorisnici[i].ime == trazeniKor || sviKorisnici[i].prezime == trazeniKor || sviKorisnici[i].ime + " " + sviKorisnici[i].prezime == trazeniKor) {
+        if (sviKorisnici[i].ime == trazeniKor || sviKorisnici[i].prezime == trazeniKor || sviKorisnici[i].ime + " " + sviKorisnici[i].prezime == trazeniKor || sviKorisnici[i].id == trazeniKor) {
 
             var divTrazenogKorisnika = document.createElement("div");
             divTrazenogKorisnika.setAttribute("class", "divTrazenogKorisnik")
@@ -215,6 +253,7 @@ function pretragaKorisnikaPoImenu(sviKorisnici) {
     } return;
     alert("Nepoznat korisnik")
 }
+
 function uclaniKorisnika(idTrazenogKor) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -285,14 +324,29 @@ function prikaziKrupnoKorisnika(x) {
                     if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length == 0) {
                         sviKorisnici[i].podaciOKnjigama.uzeteKnjige = 0;
                     }
-                    dugmeZaUzeteK.setAttribute("onclick", "prikazUzetihKnjiga('" + sviKorisnici[i].podaciOKnjigama.uzeteKnjige + "');");
+
+                    var uzeteZaProslediti = "";
+                    if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige == 0) {
+                        uzeteZaProslediti = 0;
+                    } else {
+                        uzeteZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.uzeteKnjige;
+
+                    } console.log("uzete za proslediti", uzeteZaProslediti)
+
+                    dugmeZaUzeteK.setAttribute("onclick", "prikazUzetihKnjiga('" + uzeteZaProslediti + "');");
                     dugmeRezervisaneK.innerHTML = "Rezervisane knjige";
                     if (sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length == 0) {
                         sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige = 0;
                     }
-                    var korisnikZaProslediti="";
-                    korisnikZaProslediti=sviKorisnici[i].id+","+sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige;
-                    dugmeRezervisaneK.setAttribute("onclick", "prikazRezervisanihKnjiga('" + korisnikZaProslediti + "');");
+
+                    var rezervisaneZaProslediti = "";
+                    if (sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige == 0) {
+                        rezervisaneZaProslediti = 0;
+                    } else {
+                        rezervisaneZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige;
+
+                    } console.log("sta god", rezervisaneZaProslediti)
+                    dugmeRezervisaneK.setAttribute("onclick", "prikazRezervisanihKnjiga('" + rezervisaneZaProslediti + "');");
                     dugmeZaVraceneK.innerHTML = "Vracene knjige"
                     if (sviKorisnici[i].podaciOKnjigama.vraceneKnjige.length == 0) {
                         sviKorisnici[i].podaciOKnjigama.vraceneKnjige = 0;
@@ -323,15 +377,19 @@ function prikazRezervisanihKnjiga(x) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var podaci = xhttp.responseText;
-            document.getElementById("divZaKnjigeOdabranogK").innerHTML ="";
+            document.getElementById("divZaKnjigeOdabranogK").innerHTML = "";
             if (podaci != "") {
                 var sveKnjige = JSON.parse(podaci);
             } else {
                 sveKnjige = []
-            } if (x == 0) {      
+            }
+            if (x == 0) {
                 document.getElementById("divZaKnjigeOdabranogK").innerHTML = "<p>Nema rezervisanih knjiga</p>"
             } else {
+                console.log(x);
                 var rezervisaneKnjige = x.split(",");
+
+
                 for (var i = 1; i <= rezervisaneKnjige.length; i++) {
                     for (var j = 0; j < sveKnjige.length; j++) {
                         if (rezervisaneKnjige[i] == sveKnjige[j].id) {
@@ -345,14 +403,15 @@ function prikazRezervisanihKnjiga(x) {
                             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[j].id;
                             var zanrKnjigeDiva = document.createElement("div");
                             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[j].zanr;
-var podatakZaProslediti="";
-podatakZaProslediti=rezervisaneKnjige[0]+","+[sveKnjige[j].id];
-                            console.log(podatakZaProslediti);
-                            var dugmeZaZaduzenje=document.createElement("button");
-                            dugmeZaZaduzenje.innerHTML="Zaduziti";
+                            var podatakZaProslediti = "";
+                            podatakZaProslediti = rezervisaneKnjige[0] + "," + sveKnjige[j].id;
+                            var dugmeZaZaduzenje = document.createElement("button");
+                            dugmeZaZaduzenje.innerHTML = "Zaduziti";
+                            console.log(podatakZaProslediti)
                             dugmeZaZaduzenje.setAttribute("onclick", "zaduzitiKorisnikaKnjigom('" + podatakZaProslediti + "');");
-                            var dugmeZaPonistavanje=document.createElement("button");
-                            dugmeZaPonistavanje.innerHTML="Ponistiti";
+                            var dugmeZaPonistavanje = document.createElement("button");
+                            dugmeZaPonistavanje.innerHTML = "Ponistiti";
+                            dugmeZaPonistavanje.setAttribute("onclick", "ponistitiRezervaciju('" + podatakZaProslediti + "');");
                             noviDivKnjige.appendChild(imeKnjigeDiva);
                             noviDivKnjige.appendChild(pisacKnjigeDiva);
                             noviDivKnjige.appendChild(idKnjigeDiva);
@@ -374,7 +433,7 @@ function prikazUzetihKnjiga(x) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var podaci = xhttp.responseText;
-            document.getElementById("divZaKnjigeOdabranogK").innerHTML ="";
+            document.getElementById("divZaKnjigeOdabranogK").innerHTML = "";
             if (podaci != "") {
                 var sveKnjige = JSON.parse(podaci);
             } else {
@@ -383,8 +442,10 @@ function prikazUzetihKnjiga(x) {
             if (x == 0) {
                 document.getElementById("divZaKnjigeOdabranogK").innerHTML = "<p>Nema uzetih Knjiga</p>"
             } else {
+
                 var uzeteKnjige = x.split(",");
-                for (var i = 0; i < uzeteKnjige.length; i++) {
+                console.log(uzeteKnjige)
+                for (var i = 1; i <= uzeteKnjige.length; i++) {
                     for (var j = 0; j < sveKnjige.length; j++) {
                         if (uzeteKnjige[i] == sveKnjige[j].id) {
                             var noviDivKnjige = document.createElement("div");
@@ -397,10 +458,16 @@ function prikazUzetihKnjiga(x) {
                             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[j].id;
                             var zanrKnjigeDiva = document.createElement("div");
                             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[j].zanr;
+                            var dugmeVratitiKnjigu = document.createElement("button");
+                            var podatakZaProslediti = "";
+                            podatakZaProslediti = uzeteKnjige[0] + "," + sveKnjige[j].id;
+                            dugmeVratitiKnjigu.innerHTML = "Vracena knjiga";
+                            dugmeVratitiKnjigu.setAttribute("onclick", "vracanjeKnjige('" + podatakZaProslediti + "');");
                             noviDivKnjige.appendChild(imeKnjigeDiva);
                             noviDivKnjige.appendChild(pisacKnjigeDiva);
                             noviDivKnjige.appendChild(idKnjigeDiva);
                             noviDivKnjige.appendChild(zanrKnjigeDiva);
+                            noviDivKnjige.appendChild(dugmeVratitiKnjigu);
                             document.getElementById("divZaKnjigeOdabranogK").appendChild(noviDivKnjige);
                         }
                     }
@@ -416,7 +483,7 @@ function prikazVracenihKnjiga(x) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var podaci = xhttp.responseText;
-            document.getElementById("divZaKnjigeOdabranogK").innerHTML ="";
+            document.getElementById("divZaKnjigeOdabranogK").innerHTML = "";
             if (podaci != "") {
                 var sveKnjige = JSON.parse(podaci);
             } else {
@@ -453,29 +520,134 @@ function prikazVracenihKnjiga(x) {
     xhttp.open("POST", "knjige.json", true);
     xhttp.send();
 }
-function zaduzitiKorisnikaKnjigom(prosledjeniPodaci){
+function zaduzitiKorisnikaKnjigom(prosledjeniPodaci) {
     var xhttp = new XMLHttpRequest();
+    console.log(prosledjeniPodaci)
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var podaci = xhttp.responseText;
-            
-                var sviKorisnici = JSON.parse(podaci);
-           var podeljeno=prosledjeniPodaci.split(",");
-           trazeniKID=podeljeno[0];
-           idKnjige=podeljeno[1];
-           for(var i=0; i<sviKorisnici.length;i++){
-               if(sviKorisnici[i].id==trazeniKID){
-                   sviKorisnici[i].podaciOKnjigama.uzeteKnjige.push(idKnjige);
-                   for(var j=0; j<sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length;j++){
-                       if(idKnjige==sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige[j]){
-                        sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.splice(j,1);
-                        proslediNovePodatkeOK(sviKorisnici);
-                       }
-                   }
-               }
-           }
+            var sviKorisnici = JSON.parse(podaci);
+            var podeljeno = prosledjeniPodaci.split(",");
+            trazeniKID = podeljeno[0];
+            idKnjige = podeljeno[1];
+            for (var i = 0; i < sviKorisnici.length; i++) {
+                if (sviKorisnici[i].id == trazeniKID) {
+                    if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige == 0) {
+                        sviKorisnici[i].podaciOKnjigama.uzeteKnjige = [];
+                    }
+                    sviKorisnici[i].podaciOKnjigama.uzeteKnjige.push(idKnjige);
+                    for (var j = 0; j < sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length; j++) {
+                        if (idKnjige == sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige[j]) {
+                            sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.splice(j, 1);
+                            proslediNovePodatkeOK(sviKorisnici);
+                            zaProslediti = "";
+                            zaProslediti += sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige;
+                            prikazRezervisanihKnjiga(zaProslediti)
+                        }
+                    }
+                }
+            }
         }
     };
     xhttp.open("POSt", "korisnici.json", true);
     xhttp.send();
+}
+function ponistitiRezervaciju(prosledjeniPodaci) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var podaci = xhttp.responseText;
+            var sviKorisnici = JSON.parse(podaci);
+            var podeljeno = prosledjeniPodaci.split(",");
+            trazeniKID = podeljeno[0];
+            idKnjige = podeljeno[1];
+            for (var i = 0; i < sviKorisnici.length; i++) {
+                if (sviKorisnici[i].id == trazeniKID) {
+                    for (var j = 0; j < sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length; j++) {
+                        if (idKnjige == sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige[j]) {
+                            sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.splice(j, 1);
+                            proslediNovePodatkeOK(sviKorisnici);
+                            zaProslediti = "";
+                            zaProslediti += sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige;
+                            promenitiPodatakOKnjizi(idKnjige)
+                            prikazRezervisanihKnjiga(zaProslediti)
+                        }
+                    }
+
+                }
+            }
+        }
+    };
+    xhttp.open("POSt", "korisnici.json", true);
+    xhttp.send();
+}
+function vracanjeKnjige(x) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var podaci = xhttp.responseText;
+            var sviKorisnici = JSON.parse(podaci);
+            var podeljeno = x.split(",");
+            trazeniKID = podeljeno[0];
+            idKnjige = podeljeno[1];
+            for (var i = 0; i < sviKorisnici.length; i++) {
+                if (sviKorisnici[i].id == trazeniKID) {
+                    console.log(podeljeno[0])
+                    // sviKorisnici[i].podaciOKnjigama.uzeteKnjige.splice();
+                    for (var j = 0; j < sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length; j++) {
+                        if (idKnjige == sviKorisnici[i].podaciOKnjigama.uzeteKnjige[j]) {
+                            sviKorisnici[i].podaciOKnjigama.uzeteKnjige.splice(j, 1);
+                            sviKorisnici[i].podaciOKnjigama.vraceneKnjige.push(idKnjige);
+                            if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length == 0) {
+                                sviKorisnici[i].podaciOKnjigama.uzeteKnjige = 0;
+                            }
+
+                            var uzeteZaProslediti = "";
+                            if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige == 0) {
+                                uzeteZaProslediti = 0;
+                            } else {
+                                uzeteZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.uzeteKnjige;
+
+                            } console.log("uzete za proslediti", uzeteZaProslediti);
+                            proslediNovePodatkeOK(sviKorisnici);
+                            promenitiPodatakOKnjizi(idKnjige)
+                            prikazUzetihKnjiga(uzeteZaProslediti)
+
+                        }
+                    }
+
+
+                }
+            }
+        }
+    };
+    xhttp.open("POSt", "korisnici.json", true);
+    xhttp.send();
+}
+function promenitiPodatakOKnjizi(idKnjige) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var podaci = xhttp.responseText;
+            if (podaci != "") {
+                var sveKnjige = JSON.parse(podaci);
+            } else {
+                sveKnjige = []
+            }
+            for (var i = 0; i < sveKnjige.length; i++) {
+                if (sveKnjige[i] == idKnjige) {
+                    sveKnjige[i].rezervisana = false;
+                    proslediNovePodatkeOKnjigama(sveKnjige);
+                }
+            }
+        }
+    };
+    xhttp.open("POST", "knjige.json", true);
+    xhttp.send();
+}
+function proslediNovePodatkeOKnjigama(sveKnjige) {
+    var xmr = new XMLHttpRequest;
+    var nesto = JSON.stringify(sveKnjige);
+    xmr.open("POST", "knjige.php?q=" + nesto, true);
+    xmr.send();
 }

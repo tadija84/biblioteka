@@ -48,7 +48,7 @@
       <button id="izlogujSe">Izloguj se</button>
       <button id="idiNaUnosNB">Novi bibliotekar</button>
     </div>
-  
+
     <div id="divPromenaSifre">
       <h3>promena sifre bibliotekara</h3>
       <label for="staraSifraBibliotekara">Unesi staru sifru</label>
@@ -60,38 +60,55 @@
       <button id="dugmeZaPromenuSifreB">Promeni</button>
 
     </div>
-  
+
     <div id="unosNoveKnjige">
       <h3>Unos nove knjige</h3>
-      <input type="text" id="IDNoveKnjige" name="IDNoveKnjige"> <br>
+      <label for="imeNoveKnjige">Ime knjige</label>
       <input type="text" id="imeNoveKnjige" name="imeNoveKnjige"><br>
+      <label for="imePiscaNoveKnjige">Pisac</label>
       <input type="text" id="imePiscaNoveKnjige" name="imePiscaNoveKnjige"><br>
+      <label for="izdavacNoveKnjige">Izdavac</label>
       <input type="text" id="izdavacNoveKnjige" name="izdavacNoveKnjige"><br>
+      <label for="godinaIzdanjaNoveKnjige">Godina izdanja</label>
       <input type="text" id="godinaIzdanjaNoveKnjige" name="godinaIzdanjaNoveKnjige"><br>
-      <input type="text" id="zanrNoveKnjige" name="zanrNoveKnjige"><br>
-
+      <!--<label for="zanrNoveKnjige">Zanr</label>
+      <input type="text" id="zanrNoveKnjige" name="zanrNoveKnjige"><br>-->
+      <label for="novaKnjigaPoPularno">Popularno</label>
+      <input type="checkbox" name="novaKnjigaPoPularno" id="novaKnjigaPoPularno"><br>
+      <label for="novo">Novo</label>
+      <input type="checkbox" name="novo" id="novo"><br>
+      <label for="nobelovac">Nobelova nagrada</label>
+      <input type="checkbox" name="nobelovac" id="nobelovac"><br>
+      <label for="ostaleNagrade">Ostale nagrade</label>
+      <input type="checkbox" name="ostaleNagrade" id="ostaleNagrade"><br>
+      <label for="zanrNoveKnjige">Odaberi zanr nove knjige</label><br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="naucna fantastika">Naucna fantastika <br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="roman">Roman<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="ljubavni">Ljubavni roman<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="istorija">Istorija<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="ratni">Ratni roman<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="udzbenik">Udzbenik<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="poezija">Poezija<br>
+      <input type="radio" name="zanrNoveKnjige" id="" value="ostalo">Ostalo<br>
       <button id="unesiNovuKnjigu">Unesi</button>
     </div>
     <div id="radSaKorisnicima">
       <h3>rad sa korisnicima</h3>
-      <label for="potraziKorisnikaPoID">Potrazi korisnika po ID</label>
-      <input type="text" id="potraziKorisnikaPoID"><br>
-      <button id="dugmePotraziKorisnikaPoID">Potrazi</button><br>
-   
-      <label for="potraziKorisnikaPoImenu">Pretrazi korisnika po imenu</label>
+
+      <label for="potraziKorisnikaPoImenu">Pretrazi korisnika po imenu ili ID</label>
       <input type="text" id="potraziKorisnikaPoImenu"><br>
       <button id="dugmePotraziKorisnikaPoImenu">Pretrazi</button>
       <div id="divZaPrikazPretrageKorisnika"></div>
-     
+
     </div>
-     <div id="divZaOdabranogKorisnika">
-       
-       
-     </div>
-     <div id="divZaKnjigeOdabranogK"></div>
+    <div id="divZaOdabranogKorisnika">
+
+
+    </div>
+    <div id="divZaKnjigeOdabranogK"></div>
   </div>
   <br>
- 
+
 
   <footer>
 
