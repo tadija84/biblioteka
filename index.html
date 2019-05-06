@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Biblioteka</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 </head>
 
 <body>
@@ -15,7 +16,6 @@
         <h2>NARODNA BIBLIOTEKA SRBIJE</h2>
         <div id="linkLog">
             <p id="paraLinkLog">Uloguj se</p>
-            </section>
         </div>
     </header>
     <div id="container">
@@ -55,7 +55,6 @@
         </aside>
         <div id="zaPrikaz">
             <div id="kaoMeniNaPocetnoj">
-                <button>Popularno</button><button>Abecedno</button>
             </div>
             <div id="zaPrikazNaslovna"></div>
             <div id="zaPrikazPopularno"></div>
@@ -110,16 +109,18 @@
     <div id="podaciOKnjigamaKorisnika">
         <div id="triNizaPodataka">
             <!--ovde mozda staviti dugmad-->
-            <div class="jedanOdTriNiza" id="uzeteKnjige">Uzete</div>
-            <div class="jedanOdTriNiza" id="nevraceneKnjige">Nevracene</div>
-            <div class="jedanOdTriNiza" id="clanarina">Clanarina</div>
+            <div class="jedanOdTriNiza" id="prikaziUzeteKnjige">Uzete</div>
+            <div class="jedanOdTriNiza" id="prikaziNevraceneKnjige">Nevracene</div>
+            <div class="jedanOdTriNiza" id="prikaziVraceneKnjige">Vracene</div>
+            <div class="jedanOdTriNiza" id="prikaziRezervisaneKnjige">Rezervisane</div>
+            <div class="jedanOdTriNiza" id="prikaziClanarinu">Clanarina</div>
         </div>
-        <div></div>
-        <div class="knjigaKorisnika">knjiga1</div>
-        <div class="knjigaKorisnika">knjiga2</div>
-        <div class="knjigaKorisnika">knjiga3</div>
-        <div class="knjigaKorisnika">knjiga3</div>
-        <div class="knjigaKorisnika">knjiga4</div>
+        <div id="uzeteKnjigeKorisnika"></div>
+        <div id="nevraceneKnjigeKorisnika"></div>
+        <div id="vraceneKnjige"></div>
+        <div id="rezervisaneKnjige"></div>
+        <div id="clanarina"></div>
+        
     </div>
     <button id="prikaziProfil">Prikazi profil</button>
     <footer>
