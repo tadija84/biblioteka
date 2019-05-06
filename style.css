@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
 }
 header{
     position: relative;
@@ -97,6 +98,7 @@ margin-left: 20vw;
 .jedanOdTriNiza{
     display: inline-block;
     background-color: antiquewhite;
+    cursor: pointer;
 }
 .knjigaKorisnika{
     position: relative;
@@ -150,4 +152,32 @@ aside div{
 }
 #odabirZanra{
     display:none;
+}
+#prikazKnjigeKrupno{
+    position: relative;
+    display: block;
+    float: left;
+    width: 60vw;
+}
+#prikaziProfil{
+    display:none;
+}
+#unosBibliotekara, #profilBibliotekara,#divPromenaSifre,#unosNoveKnjige,#radSaKorisnicima,#divZaOdabranogKorisnika{
+    display: none;
+
+}
+.divTrazenogKorisnik{
+    border:solid black 3px
+}
+#divZaOdabranogKorisnika{
+    position: relative;
+    width:10vw;
+    border-bottom: solid red 3px;
+}
+#rezervisaneKnjige{
+    min-height: 50vh;
+}
+.odabranaKnjigaKorisnika{
+    border: solid red 3px;
+    margin: 2vw;
 }
