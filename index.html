@@ -22,7 +22,9 @@
         <div id="zaPretragu">
             <input type="text" placeholder="Ukucajte ime knjige ili pisca" id="trazenaKnjiga">
             <button id="pretragaKnjiga">Pretrazi</button>
+
         </div>
+        <button id="prikaziProfil">Prikazi profil</button>
         <aside id="left">
             <div id="pocetnaLink">
                 <p>POCETNA</p>
@@ -76,30 +78,29 @@
     <div id="zaLogovanje">
         <div id="omotZaLog">
             <label for="idKorisnika">Vas id</label>
-            <input type="text" id="idKorisnika"><br>
+            <input type="text" id="idKorisnika" required><br>
             <label for="sifraKorisnika">Sifra</label>
-            <input type="text" id="sifraKorisnika">
+            <input type="text" id="sifraKorisnika" type="password" required>
             <button id="ulogujMe">Uloguj me</button><br>
             <p id="linkRegistracija">Nemate nalog? Registrujte se.</p>
         </div>
     </div>
     <div id="registracijaKorisnika">
         <label for="imeNovogKorisnika">Ime</label>
-        <input type="text" id="imeNovogKorisnika"><br>
+        <input type="text" id="imeNovogKorisnika"required><br>
         <label for="prezimeNovogKorisnika">Prezime</label>
-        <input type="text" id="prezimeNovogKorisnika"><br>
+        <input type="text" id="prezimeNovogKorisnika"required><br>
         <label for="brojTelefonaNovogKorisnika">Broj telefona</label>
-        <input type="text" id="brojTelefonaNovogKorisnika"><br>
+        <input type="text" id="brojTelefonaNovogKorisnika"required><br>
         <label for="mejlNovogKorisnika">email</label>
-        <input type="text" id="mejlNovogKorisnika"><br>
+        <input type="text" id="mejlNovogKorisnika"required><br>
         <label for="jmbgNovogKorisnika">JMBG ili broj licne karte</label>
-        <input type="text" id="jmbgNovogKorisnika"><br>
+        <input type="text" id="jmbgNovogKorisnika"required><br>
         <label for="sifraNovogKorisnika">Odaberi sifru</label>
-        <input type="text" id="sifraNovogKorisnika"><br>
+        <input type="text" id="sifraNovogKorisnika" type="password"required><br>
         <label for="potvrdjenaSifraNK">Potvrdi sifru</label>
-        <input type="text" id="potvrdjenaSifraNK"><br>
+        <input type="text" id="potvrdjenaSifraNK" type="password"required><br>
         <button id="potvrdiNovogKorisnika">Potvrdi</button><br>
-        <!-- <input type="text" id="IDNovogKorisnika" placeholder="*********">-->
         <p id="ipakImamNalog">Imate nalog</p>
     </div>
     <div id="IDsifraKorisnika">
@@ -108,7 +109,7 @@
     </div>
     <div id="podaciOKnjigamaKorisnika">
         <div id="triNizaPodataka">
-            <!--ovde mozda staviti dugmad-->
+            <div class="jedanOdTriNiza" id="vratiNazad">Pocetna</div>
             <div class="jedanOdTriNiza" id="prikaziUzeteKnjige">Uzete</div>
             <div class="jedanOdTriNiza" id="prikaziNevraceneKnjige">Nevracene</div>
             <div class="jedanOdTriNiza" id="prikaziVraceneKnjige">Vracene</div>
@@ -120,9 +121,9 @@
         <div id="vraceneKnjige"></div>
         <div id="rezervisaneKnjige"></div>
         <div id="clanarina"></div>
-        
+        <div id="zaPrikazLPodataka"></div>
+
     </div>
-    <button id="prikaziProfil">Prikazi profil</button>
     <footer>
 
     </footer>

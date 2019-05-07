@@ -2,7 +2,7 @@ document.getElementById("dugmeUnosNovogBibliotekara").addEventListener("click", 
 document.getElementById("unesiNovuKnjigu").addEventListener("click", pozivanjeUnosaNoveKnjige);
 document.getElementById("paraLinkLog").addEventListener("click", idiNaProfilBibliotekara);
 document.getElementById("idiNaPromenuSifre").addEventListener("click", idiNaPromenuSifre);
-document.getElementById("dugmeZaPromenuSifreB").addEventListener("click", idiNaPromenuSifre);
+document.getElementById("dugmeZaPromenuSifreB").addEventListener("click", pozivMenjanjaSifre);
 document.getElementById("dugmeLogovanjeBibliotekara").addEventListener("click", logovanjeKorisnika);
 document.getElementById("izlogujSe").addEventListener("click", izlogovatiKorisnika);
 document.getElementById("linkNaUnosKnjiga").addEventListener("click", idiNaUnosKnjiga);
@@ -13,7 +13,12 @@ document.getElementById("dugmePotraziKorisnikaPoImenu").addEventListener("click"
 window.onload = function (e) {
     if (koJeUlogovan() != null) {
         idiNaProfilBibliotekara();
-        document.getElementById("linkLog").style.display = "block"
+        document.getElementById("linkZaLog").style.display = "block"
+    }
+}
+function hideDivs(divs) {
+    for (var i = 0; i < divs.length; i++) {
+        document.getElementById(divs[i]).style.display = 'none';
     }
 }
 function pozivanjeUnosaNoveKnjige() {
@@ -30,18 +35,17 @@ function pozivanjeAjaksa(metoda, funkcija, fajlSaPodacima) {
                 sviKorisnici = []
             }
             funkcija(sviKorisnici);
-            console.log(sviKorisnici);
         }
     };
     xhttp.open(metoda, fajlSaPodacima, true);
     xhttp.send();
 }
+
 function unosNoveKnjige(x) {
     var imeKnjige = document.getElementById("imeNoveKnjige").value;
     var imePisca = document.getElementById("imePiscaNoveKnjige").value;
     var izdavacK = document.getElementById("izdavacNoveKnjige").value;
     var godinaIzdanja = document.getElementById("godinaIzdanjaNoveKnjige").value;
-    //var zanrK = document.getElementById("zanrNoveKnjige").value;
     var xmr = new XMLHttpRequest;
     var duzinaNiza = x.length;
     var noviIDKnjige = kreiranjeIDKnjige(duzinaNiza, imeKnjige, imePisca, izdavacK, godinaIzdanja);
@@ -114,12 +118,7 @@ function unosNoveKnjige(x) {
     document.getElementById("radioost").checked = false;
 }
 function kreiranjeIDKnjige(duzinaNiza, imeKnjige, imePisca, izdavacK, godinaIzdanja) {
-    //console.log(duzinaNiza, imeKnjige, imePisca, izdavacK, godinaIzdanja)
     return duzinaNiza + imeKnjige[0] + imePisca[0] + godinaIzdanja + izdavacK[0];
-
-}
-function prikazi(x) {
-    console.log(x);
 }
 function logovanjeKorisnika() {
     pozivanjeAjaksa("GET", ulogujBibliotekara, "bibliotekari.json");
@@ -130,7 +129,7 @@ function ulogujBibliotekara(x) {
     for (var i = 0; i < x.length; i++) {
         if (user == x[i].userName || pass == x[i].sifra) {
             localStorage.setItem("ulogovaniBibliotekar", x[i].userName);
-            document.getElementById("linkLog").style.display = "block"
+            document.getElementById("linkZaLog").style.display = "block"
             document.getElementById("profilBibliotekara").style.display = "block";
             hideDivs(["logovanjeBibliotekara", "divPromenaSifre", "unosBibliotekara", "zaPretragu", "unosNoveKnjige", "radSaKorisnicima"])
         } else {
@@ -145,11 +144,6 @@ function izlogovatiKorisnika() {
 function koJeUlogovan() {
     var idUlogovanogKorisnika = localStorage.getItem('ulogovaniBibliotekar');
     return idUlogovanogKorisnika;
-}
-function hideDivs(divs) {
-    for (var i = 0; i < divs.length; i++) {
-        document.getElementById(divs[i]).style.display = 'none';
-    }
 }
 function pozivanjeUnosaNovogBibliotekara() {
     var imeNovogB = document.getElementById("imeNovogBibliotekara").value;
@@ -190,16 +184,20 @@ function pozivMenjanjaSifre() {
     pozivanjeAjaksa("POST", promenaSifre, "bibliotekari.json");
 }
 function promenaSifre(bibliotekari) {
-    var ulogovaniBibliotekar = koJeUlogovan();
+    var ulogovaniBibliotekar = koJeUlogovan();  
     var staraSifra = document.getElementById("staraSifraBibliotekara").value;
     var novaSifra = document.getElementById("novaSifraBibliotekara").value;
     var novaSifraPotvrda = document.getElementById("potvrdaNoveSifreBibliotekara").value;
-    for (var i = 0; i < bibliotekari.length; i++) {
+    for (var i = 0; i < bibliotekari.length; i++) {alert("poklapa se")
         if (bibliotekari[i].userName == ulogovaniBibliotekar) {
             if (staraSifra != bibliotekari[i].sifra) {
-                alert("pogresna sifra");
+              alert("pogresna sifra");
             } else if (novaSifra == novaSifraPotvrda) {
                 bibliotekari[i].sifra = novaSifra;
+                var xmr = new XMLHttpRequest;
+                var nesto = JSON.stringify(bibliotekari);
+                xmr.open("POST", "bibliotekari.php?q=" + nesto, true);
+                xmr.send();
             } else {
                 alert("sifre se ne poklapaju")
             }
@@ -209,12 +207,10 @@ function promenaSifre(bibliotekari) {
 function idiNaUnosKnjiga() {
     document.getElementById("unosNoveKnjige").style.display = "block";
     hideDivs(["logovanjeBibliotekara", "profilBibliotekara", "unosBibliotekara", "zaPretragu", "divPromenaSifre", "radSaKorisnicima"])
-
 }
 function idiNaRadSaKorisnicima() {
     document.getElementById("radSaKorisnicima").style.display = "block";
     hideDivs(["logovanjeBibliotekara", "profilBibliotekara", "unosBibliotekara", "zaPretragu", "divPromenaSifre", "unosNoveKnjige"])
-
 }
 function idiNaUnosNovogB() {
     var ulogovan = koJeUlogovan();
@@ -228,13 +224,11 @@ function idiNaUnosNovogB() {
 function pozivPretragePoImenu() {
     pozivanjeAjaksa("POST", pretragaKorisnikaPoImenu, "korisnici.json");
 }
-
 function pretragaKorisnikaPoImenu(sviKorisnici) {
     var trazeniKor = document.getElementById("potraziKorisnikaPoImenu").value;
     document.getElementById("divZaPrikazPretrageKorisnika").innerHTML = ""
     for (var i = 0; i < sviKorisnici.length; i++) {
         if (sviKorisnici[i].ime == trazeniKor || sviKorisnici[i].prezime == trazeniKor || sviKorisnici[i].ime + " " + sviKorisnici[i].prezime == trazeniKor || sviKorisnici[i].id == trazeniKor) {
-
             var divTrazenogKorisnika = document.createElement("div");
             divTrazenogKorisnika.setAttribute("class", "divTrazenogKorisnik")
             var imeTrazenogKorisnika = document.createElement("p");
@@ -261,9 +255,7 @@ function pretragaKorisnikaPoImenu(sviKorisnici) {
             divTrazenogKorisnika.setAttribute("onclick", "prikaziKrupnoKorisnika('" + sviKorisnici[i].id + "');")
             document.getElementById("divZaPrikazPretrageKorisnika").appendChild(divTrazenogKorisnika);
         }
-
-    } return;
-    alert("Nepoznat korisnik")
+    }
 }
 
 function uclaniKorisnika(idTrazenogKor) {
@@ -286,7 +278,6 @@ function uclaniKorisnika(idTrazenogKor) {
     };
     xhttp.open("POST", "korisnici.json", true);
     xhttp.send();
-    // pozivPretragePoImenu();
 }
 function proslediNovePodatkeOK(sviKorisnici) {
     var xmr = new XMLHttpRequest;
@@ -294,8 +285,6 @@ function proslediNovePodatkeOK(sviKorisnici) {
     xmr.open("POST", "korisnici.php?q=" + nesto, true);
     xmr.send();
 }
-
-
 function prikaziKrupnoKorisnika(x) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -336,28 +325,23 @@ function prikaziKrupnoKorisnika(x) {
                     if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length == 0) {
                         sviKorisnici[i].podaciOKnjigama.uzeteKnjige = 0;
                     }
-
                     var uzeteZaProslediti = "";
                     if (sviKorisnici[i].podaciOKnjigama.uzeteKnjige == 0) {
                         uzeteZaProslediti = 0;
                     } else {
                         uzeteZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.uzeteKnjige;
-
-                    } console.log("uzete za proslediti", uzeteZaProslediti)
-
+                    }
                     dugmeZaUzeteK.setAttribute("onclick", "prikazUzetihKnjiga('" + uzeteZaProslediti + "');");
                     dugmeRezervisaneK.innerHTML = "Rezervisane knjige";
                     if (sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length == 0) {
                         sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige = 0;
                     }
-
                     var rezervisaneZaProslediti = "";
                     if (sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige == 0) {
                         rezervisaneZaProslediti = 0;
                     } else {
                         rezervisaneZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige;
-
-                    } console.log("sta god", rezervisaneZaProslediti)
+                    }
                     dugmeRezervisaneK.setAttribute("onclick", "prikazRezervisanihKnjiga('" + rezervisaneZaProslediti + "');");
                     dugmeZaVraceneK.innerHTML = "Vracene knjige"
                     if (sviKorisnici[i].podaciOKnjigama.vraceneKnjige.length == 0) {
@@ -382,9 +366,7 @@ function prikaziKrupnoKorisnika(x) {
     xhttp.open("POST", "korisnici.json", true);
     xhttp.send();
 }
-
 function prikazRezervisanihKnjiga(x) {
-    console.log(x);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -400,10 +382,7 @@ function prikazRezervisanihKnjiga(x) {
             if (x == 0) {
                 divZaKnjO.innerHTML = "<p class='posebanPar'>Nema rezervisanih knjiga</p>"
             } else {
-                console.log(x);
                 var rezervisaneKnjige = x.split(",");
-
-
                 for (var i = 1; i <= rezervisaneKnjige.length; i++) {
                     for (var j = 0; j < sveKnjige.length; j++) {
                         if (rezervisaneKnjige[i] == sveKnjige[j].id) {
@@ -421,7 +400,6 @@ function prikazRezervisanihKnjiga(x) {
                             podatakZaProslediti = rezervisaneKnjige[0] + "," + sveKnjige[j].id;
                             var dugmeZaZaduzenje = document.createElement("button");
                             dugmeZaZaduzenje.innerHTML = "Zaduziti";
-                            console.log(podatakZaProslediti)
                             dugmeZaZaduzenje.setAttribute("onclick", "zaduzitiKorisnikaKnjigom('" + podatakZaProslediti + "');");
                             var dugmeZaPonistavanje = document.createElement("button");
                             dugmeZaPonistavanje.innerHTML = "Ponistiti";
@@ -458,9 +436,7 @@ function prikazUzetihKnjiga(x) {
             if (x == 0) {
                 divZaKnjO.innerHTML = "<p class='posebanPar'>Nema uzetih Knjiga</p>"
             } else {
-
                 var uzeteKnjige = x.split(",");
-                console.log(uzeteKnjige)
                 for (var i = 1; i <= uzeteKnjige.length; i++) {
                     for (var j = 0; j < sveKnjige.length; j++) {
                         if (uzeteKnjige[i] == sveKnjige[j].id) {
@@ -540,7 +516,6 @@ function prikazVracenihKnjiga(x) {
 }
 function zaduzitiKorisnikaKnjigom(prosledjeniPodaci) {
     var xhttp = new XMLHttpRequest();
-    console.log(prosledjeniPodaci)
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var podaci = xhttp.responseText;
@@ -610,8 +585,6 @@ function vracanjeKnjige(x) {
             idKnjige = podeljeno[1];
             for (var i = 0; i < sviKorisnici.length; i++) {
                 if (sviKorisnici[i].id == trazeniKID) {
-                    console.log(podeljeno[0])
-                    // sviKorisnici[i].podaciOKnjigama.uzeteKnjige.splice();
                     for (var j = 0; j < sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length; j++) {
                         if (idKnjige == sviKorisnici[i].podaciOKnjigama.uzeteKnjige[j]) {
                             sviKorisnici[i].podaciOKnjigama.uzeteKnjige.splice(j, 1);
@@ -625,16 +598,13 @@ function vracanjeKnjige(x) {
                                 uzeteZaProslediti = 0;
                             } else {
                                 uzeteZaProslediti = sviKorisnici[i].id + "," + sviKorisnici[i].podaciOKnjigama.uzeteKnjige;
-
-                            } console.log("uzete za proslediti", uzeteZaProslediti);
+                            }
                             proslediNovePodatkeOK(sviKorisnici);
                             promenitiPodatakOKnjizi(idKnjige)
                             prikazUzetihKnjiga(uzeteZaProslediti)
 
                         }
                     }
-
-
                 }
             }
         }

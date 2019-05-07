@@ -14,7 +14,7 @@
   <header>
     <div id="logo"></div>
     <h2>NARODNA BIBLIOTEKA SRBIJE</h2>
-    <div id="linkLog">
+    <div id="linkZaLog">
       <p id="paraLinkLog">Pocetna</p>
     </div>
   </header>
@@ -22,23 +22,24 @@
     <div id="zaPretragu"></div>
     <div id="logovanjeBibliotekara">
       <label for="imeBibliotekara">Unesite ime</label>
-      <input type="text" id="imeBibliotekara"><br>
+      <input type="text" id="imeBibliotekara" required><br>
       <label for="sifraBibliotekara">Unesite sifru</label>
-      <input type="text" id="sifraBibliotekara"><br>
+      <input type="text" id="sifraBibliotekara" type="password" required><br>
       <button id="dugmeLogovanjeBibliotekara">Uloguj se</button>
     </div>
     <div id="unosBibliotekara">
       <h3>Unos novog bibliotekara</h3>
       <label for="imeNovogBibliotekara">Ime</label>
-      <input type="text" id="imeNovogBibliotekara"><br>
+      <input type="text" id="imeNovogBibliotekara"required><br>
       <label for="prezimeNovogBibliotekara">Prezime</label>
-      <input type="text" id="prezimeNovogBibliotekara"><br>
+      <input type="text" id="prezimeNovogBibliotekara"required><br>
       <label for="korisnickoImeNovogB">Korisnicko ime</label>
-      <input type="text" id="korisnickoImeNovogB"><br>
+      <input type="text" id="korisnickoImeNovogB"required><br>
       <label for="sifraNovogBibliotekara">Sifra</label>
-      <input type="text" id="sifraNovogBibliotekara">
+      <input type="text" id="sifraNovogBibliotekara" type="password"required>
       <button id="dugmeUnosNovogBibliotekara">Unesi</button>
     </div>
+    
     <div id="profilBibliotekara">
       <h3>Profil bibliotekara</h3>
       <p id="imePrezime"></p>
@@ -52,13 +53,12 @@
     <div id="divPromenaSifre">
       <h3>promena sifre bibliotekara</h3>
       <label for="staraSifraBibliotekara">Unesi staru sifru</label>
-      <input type="text" id="staraSifraBibliotekara"><br>
+      <input type="text" id="staraSifraBibliotekara" type="password"required><br>
       <label for="novaSifraBibliotekara">Unesi novu sifru</label>
-      <input type="text" id="novaSifraBibliotekara"><br>
+      <input type="text" id="novaSifraBibliotekara" type="password"required><br>
       <label for="potvrdaNoveSifreBibliotekara">Potvrdi novu sifru</label>
-      <input type="text" id="potvrdaNoveSifreBibliotekara"><br>
+      <input type="text" id="potvrdaNoveSifreBibliotekara" type="password"required><br>
       <button id="dugmeZaPromenuSifreB">Promeni</button>
-
     </div>
 
     <div id="unosNoveKnjige">
@@ -94,19 +94,14 @@
 
     <div id="radSaKorisnicima">
       <h3>rad sa korisnicima</h3>
-
       <label for="potraziKorisnikaPoImenu">Pretrazi korisnika po imenu ili ID</label>
       <input type="text" id="potraziKorisnikaPoImenu"><br>
       <button id="dugmePotraziKorisnikaPoImenu">Pretrazi</button>
       <div id="divZaPrikazPretrageKorisnika"></div>
-
     </div>
-    <div id="divZaOdabranogKorisnika">
 
+    <div id="divZaOdabranogKorisnika"></div>
 
-
-
-    </div>
     <div id="divZaKnjigeOdabranogK">
 
     </div>

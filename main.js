@@ -1,4 +1,4 @@
-//document.getElementById("pretragaKnjiga").addEventListener("click", prikaziKnjige);
+document.getElementById("vratiNazad").addEventListener("click", ponovnoUcitavanje);
 document.getElementById("potvrdiNovogKorisnika").addEventListener("click", upisNovogKorisnika);
 document.getElementById("linkLog").addEventListener("click", logLink);
 document.getElementById("linkRegistracija").addEventListener("click", prikazRegStranice);
@@ -116,7 +116,7 @@ function pozivanjeAjaksa(metoda, funkcija, fajlSaPodacima) {
                 sviKorisnici = []
             }
             funkcija(sviKorisnici);
-            console.log(sviKorisnici);
+           // console.log(sviKorisnici);
         }
     };
     xhttp.open(metoda, fajlSaPodacima, true);
@@ -152,7 +152,6 @@ function IDKorisnika(id) {
     hideDivs(["prikazOdredjeneKnjige", "zaPrikazNagradjivano", "zaPrikazNovo", "zaPrikazPoZanruSF", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "container", "zaLogovanje", "podaciOKnjigamaKorisnika", "registracijaKorisnika"]);
 }
 function prikazProfilaNovogKorisnika() {
-    var ulogovan = koJeUlogovan();
     document.getElementById("prikaziProfil").style.display = "block";
     document.getElementById("podaciOKnjigamaKorisnika").style.display = "block";
     hideDivs(["prikazOdredjeneKnjige", "zaPrikazNovo", "zaPrikazPoZanruSF", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "container", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
@@ -171,6 +170,12 @@ function prikaziNaslovneKnjige(sveKnjige) {
     for (var i = 0; i < sveKnjige.length; i++) {
         var noviDivKnjige = document.createElement("div");
         noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+        var slikaKorica = document.createElement("img");
+        if (sveKnjige[i].slika != undefined) {
+            slikaKorica.src = sveKnjige[i].slika;
+        } else {
+            slikaKorica.src = "nemaKorica.jpg";
+        }
         var imeKnjigeDiva = document.createElement("p");
         imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
         var pisacKnjigeDiva = document.createElement("p");
@@ -179,10 +184,9 @@ function prikaziNaslovneKnjige(sveKnjige) {
         idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
         var zanrKnjigeDiva = document.createElement("p");
         zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+        noviDivKnjige.appendChild(slikaKorica);
         noviDivKnjige.appendChild(imeKnjigeDiva);
         noviDivKnjige.appendChild(pisacKnjigeDiva);
-        noviDivKnjige.appendChild(idKnjigeDiva);
-        noviDivKnjige.appendChild(zanrKnjigeDiva);
         noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
         document.getElementById("zaPrikazNaslovna").appendChild(noviDivKnjige);
     }
@@ -198,6 +202,12 @@ function prikaziPopularneKnjige(sveKnjige) {
         if (sveKnjige[i].popularno == true) {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -206,10 +216,10 @@ function prikaziPopularneKnjige(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPopularno").appendChild(noviDivKnjige);
         }
@@ -226,6 +236,12 @@ function prikaziKnjigeNobelovaca(sveKnjige) {
         if (sveKnjige[i].novo == true) {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -234,10 +250,10 @@ function prikaziKnjigeNobelovaca(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazNobelovci").appendChild(noviDivKnjige);
         }
@@ -254,6 +270,12 @@ function prikaziNoveKnjige(sveKnjige) {
         if (sveKnjige[i].novo == true) {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -262,10 +284,10 @@ function prikaziNoveKnjige(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazNovo").appendChild(noviDivKnjige);
         }
@@ -282,6 +304,12 @@ function prikaziNagradjeneKnjige(sveKnjige) {
         if (sveKnjige[i].nagradjivano == true) {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -290,10 +318,10 @@ function prikaziNagradjeneKnjige(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazNagradjivano").appendChild(noviDivKnjige);
         }
@@ -311,13 +339,19 @@ function prikazKnjigaPoZanruSF() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraSF, "knjige.json");
 }
 function prikaziKnjigeZanraSF(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruSF").style.display = "block";
     document.getElementById("zaPrikazPoZanruSF").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "naucna fantastika") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -326,10 +360,10 @@ function prikaziKnjigeZanraSF(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruSF").appendChild(noviDivKnjige);
         }
@@ -339,13 +373,19 @@ function prikazKnjigaPoZanruRoman() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraRoman, "knjige.json");
 }
 function prikaziKnjigeZanraRoman(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruRoman").style.display = "block";
     document.getElementById("zaPrikazPoZanruRoman").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "roman") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -354,10 +394,10 @@ function prikaziKnjigeZanraRoman(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruRoman").appendChild(noviDivKnjige);
         }
@@ -367,13 +407,19 @@ function prikazKnjigaPoZanruLjubavni() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraLjubavni, "knjige.json");
 }
 function prikaziKnjigeZanraLjubavni(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruLjubavni").style.display = "block";
     document.getElementById("zaPrikazPoZanruLjubavni").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "ljubavni") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -382,10 +428,10 @@ function prikaziKnjigeZanraLjubavni(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruLjubavni").appendChild(noviDivKnjige);
         }
@@ -395,13 +441,19 @@ function prikazKnjigaPoZanruIstorija() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraIstorija, "knjige.json");
 }
 function prikaziKnjigeZanraIstorija(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruIstorija").style.display = "block";
     document.getElementById("zaPrikazPoZanruIstorija").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "istorija") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -410,10 +462,10 @@ function prikaziKnjigeZanraIstorija(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruIstorija").appendChild(noviDivKnjige);
         }
@@ -423,13 +475,19 @@ function prikazKnjigaPoZanruRatni() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraRatni, "knjige.json");
 }
 function prikaziKnjigeZanraRatni(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruRatni").style.display = "block";
     document.getElementById("zaPrikazPoZanruRatni").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "ratni") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -438,10 +496,10 @@ function prikaziKnjigeZanraRatni(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruRatni").appendChild(noviDivKnjige);
         }
@@ -451,13 +509,19 @@ function prikazKnjigaPoZanruUdzbenik() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraUdzbenik, "knjige.json");
 }
 function prikaziKnjigeZanraUdzbenik(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruPoezija", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruUdzbenik").style.display = "block";
     document.getElementById("zaPrikazPoZanruUdzbenik").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "udzbenik") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -466,10 +530,10 @@ function prikaziKnjigeZanraUdzbenik(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruUdzbenik").appendChild(noviDivKnjige);
         }
@@ -479,13 +543,19 @@ function prikazKnjigaPoZanruPoezija() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraPoezija, "knjige.json");
 }
 function prikaziKnjigeZanraPoezija(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruOstalo", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruPoezija").style.display = "block";
     document.getElementById("zaPrikazPoZanruPoezija").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "poezija") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -494,10 +564,10 @@ function prikaziKnjigeZanraPoezija(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruPoezija").appendChild(noviDivKnjige);
         }
@@ -507,13 +577,19 @@ function prikazKnjigaPoZanruOstalo() {
     pozivanjeAjaksa("POST", prikaziKnjigeZanraPoezija, "knjige.json");
 }
 function prikaziKnjigeZanraOstalo(sveKnjige) {
-    hideDivs(["prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
+    hideDivs(["odabirZanra", "prikazOdredjeneKnjige", "zaPrikazPoZanruSF", "zaPrikazNagradjivano", "zaPrikazNobelovci", "zaPrikazNovo", "zaPrikazPoZanruRoman", "zaPrikazPoZanruLjubavni", "zaPrikazPoZanruIstorija", "zaPrikazPoZanruRatni", "zaPrikazPoZanruUdzbenik", "zaPrikazPoZanruPoezija", "zaPrikazPopularno", "zaPrikazNaslovna", "podaciOKnjigamaKorisnika", "zaLogovanje", "IDsifraKorisnika", "registracijaKorisnika"]);
     document.getElementById("zaPrikazPoZanruOstalo").style.display = "block";
     document.getElementById("zaPrikazPoZanruOstalo").innerHTML = "";
     for (var i = 0; i < sveKnjige.length; i++) {
         if (sveKnjige[i].zanr == "ostalo") {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -522,10 +598,10 @@ function prikaziKnjigeZanraOstalo(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
-            noviDivKnjige.appendChild(zanrKnjigeDiva);
             noviDivKnjige.setAttribute("onclick", "ispisi('" + sveKnjige[i].id + "');");
             document.getElementById("zaPrikazPoZanruOstalo").appendChild(noviDivKnjige);
         }
@@ -542,6 +618,12 @@ function prikaziTrazenuKnjigu(sveKnjige) {
         if (sveKnjige[i].imeKnjige == knjigaKojaSeTrazi || sveKnjige[i].imePisca == knjigaKojaSeTrazi) {
             var noviDivKnjige = document.createElement("div");
             noviDivKnjige.setAttribute("class", "knjigaNaPocetnoj");
+            var slikaKorica = document.createElement("img");
+            if (sveKnjige[i].slika != undefined) {
+                slikaKorica.src = sveKnjige[i].slika;
+            } else {
+                slikaKorica.src = "nemaKorica.jpg";
+            }
             var imeKnjigeDiva = document.createElement("p");
             imeKnjigeDiva.innerHTML = sveKnjige[i].imeKnjige;
             var pisacKnjigeDiva = document.createElement("p");
@@ -550,6 +632,7 @@ function prikaziTrazenuKnjigu(sveKnjige) {
             idKnjigeDiva.innerHTML = "ID knjige:" + sveKnjige[i].id;
             var zanrKnjigeDiva = document.createElement("p");
             zanrKnjigeDiva.innerHTML = "Zanr:" + sveKnjige[i].zanr;
+            noviDivKnjige.appendChild(slikaKorica);
             noviDivKnjige.appendChild(imeKnjigeDiva);
             noviDivKnjige.appendChild(pisacKnjigeDiva);
             noviDivKnjige.appendChild(idKnjigeDiva);
@@ -677,6 +760,8 @@ function prikazUzetihKnjiga(sviKorisnici) {
             var sveKnjige = JSON.parse(podaci);
             for (var i = 0; i < sviKorisnici.length; i++) {
                 if (sviKorisnici[i].id == ulogovan) {
+                    var divZaPrikazLP = document.getElementById("zaPrikazLPodataka")
+                    divZaPrikazLP.innerHTML = ""
                     document.getElementById("uzeteKnjigeKorisnika").style.display = "block";
                     document.getElementById("uzeteKnjigeKorisnika").innerHTML = "";
                     hideDivs(["nevraceneKnjigeKorisnika", "vraceneKnjige", "rezervisaneKnjige", "clanarina"]);
@@ -689,8 +774,8 @@ function prikazUzetihKnjiga(sviKorisnici) {
                         return;
                     }
                     for (var j = 0; j <= sviKorisnici[i].podaciOKnjigama.uzeteKnjige.length; j++) {
-                        for(var index=0;index<sveKnjige.length; index++){
-                            if(sveKnjige[index].id==sviKorisnici[i].podaciOKnjigama.uzeteKnjige[j]){
+                        for (var index = 0; index < sveKnjige.length; index++) {
+                            if (sveKnjige[index].id == sviKorisnici[i].podaciOKnjigama.uzeteKnjige[j]) {
                                 var divZaUKnjigu = document.createElement("div");
                                 var brojKnjige = document.createElement("p");
                                 var redniBr = j + 1;
@@ -703,19 +788,19 @@ function prikazUzetihKnjiga(sviKorisnici) {
                                 idUKnjige.innerHTML = sveKnjige[index].id;
                                 divZaUKnjigu.appendChild(brojKnjige);
                                 divZaUKnjigu.appendChild(imeUKnjige);
-                                divZaUKnjigu.appendChild(imePiscaUKnjige);                                
+                                divZaUKnjigu.appendChild(imePiscaUKnjige);
                                 divZaUKnjigu.appendChild(idUKnjige);
-                                document.getElementById("uzeteKnjigeKorisnika").appendChild(divZaUKnjigu);
+                                document.getElementById("zaPrikazLPodataka").appendChild(divZaUKnjigu);
                             }
                         }
-                        
+
                     }
                 }
             }
         }
     };
     xhttp.open("GET", "knjige.json", true);
-    xhttp.send(); 
+    xhttp.send();
 }
 document.getElementById("prikaziNevraceneKnjige").addEventListener("click", pozivanjePrikazaNevracenihKnjiga);
 function pozivanjePrikazaNevracenihKnjiga() {
@@ -731,19 +816,20 @@ function prikazNevracenihKnjiga(sviKorisnici) {
             for (var i = 0; i < sviKorisnici.length; i++) {
                 if (sviKorisnici[i].id == ulogovan) {
                     document.getElementById("nevraceneKnjige").style.display = "block";
-                    document.getElementById("nevraceneKnjige").innerHTML = "";
+                    var divZaPrikazLP = document.getElementById("zaPrikazLPodataka")
+                    divZaPrikazLP.innerHTML = ""
                     hideDivs(["uzeteKnjigeKorisnika", "vraceneKnjigeKorisnika", "rezervisaneKnjige", "clanarina"]);
                     if (sviKorisnici[i].podaciOKnjigama.nevraceneKnjige == undefined || sviKorisnici[i].podaciOKnjigama.nevraceneKnjige.length == 0) {
                         var divZaUKnjigu = document.createElement("div");
                         var povratniTekst = document.createElement("p");
                         povratniTekst.innerHTML = "Nema podataka";
                         divZaUKnjigu.appendChild(povratniTekst);
-                        document.getElementById("vraceneKnjige").appendChild(divZaUKnjigu);
+                        document.getElementById("nevraceneKnjige").appendChild(divZaUKnjigu);
                         return;
                     }
                     for (var j = 0; j <= sviKorisnici[i].podaciOKnjigama.nevraceneKnjige.length; j++) {
-                        for(var index=0;index<sveKnjige.length; index++){
-                            if(sveKnjige[index].id==sviKorisnici[i].podaciOKnjigama.nevraceneKnjige[j]){
+                        for (var index = 0; index < sveKnjige.length; index++) {
+                            if (sveKnjige[index].id == sviKorisnici[i].podaciOKnjigama.nevraceneKnjige[j]) {
                                 var divZaUKnjigu = document.createElement("div");
                                 var brojKnjige = document.createElement("p");
                                 var redniBr = j + 1;
@@ -756,19 +842,19 @@ function prikazNevracenihKnjiga(sviKorisnici) {
                                 idUKnjige.innerHTML = sveKnjige[index].id;
                                 divZaUKnjigu.appendChild(brojKnjige);
                                 divZaUKnjigu.appendChild(imeUKnjige);
-                                divZaUKnjigu.appendChild(imePiscaUKnjige);                                
+                                divZaUKnjigu.appendChild(imePiscaUKnjige);
                                 divZaUKnjigu.appendChild(idUKnjige);
-                                document.getElementById("nevraceneKnjige").appendChild(divZaUKnjigu);
+                                document.getElementById("zaPrikazLPodataka").appendChild(divZaUKnjigu);
                             }
                         }
-                        
+
                     }
                 }
             }
         }
     };
     xhttp.open("GET", "knjige.json", true);
-    xhttp.send();  
+    xhttp.send();
 }
 document.getElementById("prikaziVraceneKnjige").addEventListener("click", pozivanjePrikazaVracenihKnjiga);
 function pozivanjePrikazaVracenihKnjiga() {
@@ -783,6 +869,8 @@ function prikazVracenihKnjiga(sviKorisnici) {
             var sveKnjige = JSON.parse(podaci);
             for (var i = 0; i < sviKorisnici.length; i++) {
                 if (sviKorisnici[i].id == ulogovan) {
+                    var divZaPrikazLP = document.getElementById("zaPrikazLPodataka")
+                    divZaPrikazLP.innerHTML = ""
                     document.getElementById("vraceneKnjige").style.display = "block";
                     document.getElementById("vraceneKnjige").innerHTML = "";
                     hideDivs(["uzeteKnjigeKorisnika", "nevraceneKnjigeKorisnika", "rezervisaneKnjige", "clanarina"]);
@@ -795,33 +883,34 @@ function prikazVracenihKnjiga(sviKorisnici) {
                         return;
                     }
                     for (var j = 0; j <= sviKorisnici[i].podaciOKnjigama.vraceneKnjige.length; j++) {
-                        for(var index=0;index<sveKnjige.length; index++){
-                            if(sveKnjige[index].id==sviKorisnici[i].podaciOKnjigama.vraceneKnjige[j]){
+                        for (var index = 0; index < sveKnjige.length; index++) {
+                            if (sveKnjige[index].id == sviKorisnici[i].podaciOKnjigama.vraceneKnjige[j]) {
                                 var divZaUKnjigu = document.createElement("div");
                                 var brojKnjige = document.createElement("p");
                                 var redniBr = j + 1;
+                                brojKnjige.innerHTML = "Broj" + redniBr;
                                 brojKnjige.innerHTML = "redni broj" + redniBr;
                                 var imeUKnjige = document.createElement("p");
                                 imeUKnjige.innerHTML = sveKnjige[index].imeKnjige;
                                 var imePiscaUKnjige = document.createElement("p");
-                                imePiscaUKnjige.innerHTML = sveKnjige[index].imePisca;
+                                imePiscaUKnjige.innerHTML = "Ime pisca" + sveKnjige[index].imePisca;
                                 var idUKnjige = document.createElement("p");
-                                idUKnjige.innerHTML = sveKnjige[index].id;
+                                idUKnjige.innerHTML = "ID knjige" + sveKnjige[index].id;
                                 divZaUKnjigu.appendChild(brojKnjige);
                                 divZaUKnjigu.appendChild(imeUKnjige);
-                                divZaUKnjigu.appendChild(imePiscaUKnjige);                                
-                                divZaUKnjigu.appendChild(idUKnjige);
-                                document.getElementById("vraceneKnjige").appendChild(divZaUKnjigu);
+                                divZaUKnjigu.appendChild(imePiscaUKnjige);
+                                divZaUKnjigu.setAttribute("class", "knjigaUNizu")
+                                document.getElementById("zaPrikazLPodataka").appendChild(divZaUKnjigu);
                             }
                         }
-                        
+
                     }
                 }
             }
         }
     };
     xhttp.open("GET", "knjige.json", true);
-    xhttp.send();  
+    xhttp.send();
 }
 document.getElementById("prikaziClanarinu").addEventListener("click", pozivanjePrikazaClanarine);
 function pozivanjePrikazaClanarine() {
@@ -831,6 +920,8 @@ function prikazClanarine(sviKorisnici) {
     var ulogovan = koJeUlogovan();
     for (var i = 0; i < sviKorisnici.length; i++) {
         if (sviKorisnici[i].id == ulogovan) {
+            var divZaPrikazLP = document.getElementById("zaPrikazLPodataka")
+            divZaPrikazLP.innerHTML = ""
             document.getElementById("clanarina").style.display = "block";
             document.getElementById("clanarina").innerHTML = ""
             hideDivs(["rezervisaneKnjige", "uzeteKnjigeKorisnika", "nevraceneKnjigeKorisnika", "vraceneKnjige"]);
@@ -840,7 +931,7 @@ function prikazClanarine(sviKorisnici) {
             } else {
                 clanarinaPodatak.innerHTML = "Nema podataka o clanarini ";
             }
-            document.getElementById("clanarina").appendChild(clanarinaPodatak);
+            document.getElementById("zaPrikazLPodataka").appendChild(clanarinaPodatak);
         }
     }
 }
@@ -856,6 +947,8 @@ function prikazRezervisanihKnjiga(sviKorisnici) {
             var podaci = xhttp.responseText;
             var sveKnjige = JSON.parse(podaci);
             for (var i = 0; i < sviKorisnici.length; i++) {
+                var divZaPrikazLP = document.getElementById("zaPrikazLPodataka")
+                divZaPrikazLP.innerHTML = ""
                 if (sviKorisnici[i].id == ulogovan) {
                     document.getElementById("rezervisaneKnjige").style.display = "block";
                     document.getElementById("rezervisaneKnjige").innerHTML = "";
@@ -869,8 +962,8 @@ function prikazRezervisanihKnjiga(sviKorisnici) {
                         return;
                     }
                     for (var j = 0; j <= sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige.length; j++) {
-                        for(var index=0;index<sveKnjige.length; index++){
-                            if(sveKnjige[index].id==sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige[j]){
+                        for (var index = 0; index < sveKnjige.length; index++) {
+                            if (sveKnjige[index].id == sviKorisnici[i].podaciOKnjigama.rezervisaneKnjige[j]) {
                                 var divZaUKnjigu = document.createElement("div");
                                 var brojKnjige = document.createElement("p");
                                 var redniBr = j + 1;
@@ -878,23 +971,23 @@ function prikazRezervisanihKnjiga(sviKorisnici) {
                                 var imeUKnjige = document.createElement("p");
                                 imeUKnjige.innerHTML = sveKnjige[index].imeKnjige;
                                 var imePiscaUKnjige = document.createElement("p");
-                                imePiscaUKnjige.innerHTML = sveKnjige[index].imePisca;
+                                imePiscaUKnjige.innerHTML = "Ime pisca" + sveKnjige[index].imePisca;
                                 var idUKnjige = document.createElement("p");
-                                idUKnjige.innerHTML = sveKnjige[index].id;
+                                idUKnjige.innerHTML = "ID knjige" + sveKnjige[index].id;
                                 divZaUKnjigu.appendChild(brojKnjige);
                                 divZaUKnjigu.appendChild(imeUKnjige);
                                 divZaUKnjigu.appendChild(imePiscaUKnjige);
-                                
+
                                 divZaUKnjigu.appendChild(idUKnjige);
-                                document.getElementById("rezervisaneKnjige").appendChild(divZaUKnjigu);
+                                document.getElementById("zaPrikazLPodataka").appendChild(divZaUKnjigu);
                             }
                         }
-                        
+
                     }
                 }
             }
         }
     };
     xhttp.open("GET", "knjige.json", true);
-    xhttp.send();  
+    xhttp.send();
 }

@@ -33,20 +33,32 @@ header h2{
     background-size: cover;
     margin: 0;
 }
+#zaPretragu button{
+    width: 20%;
+    height: 30%;
+    position: relative;
+    
+}
 #linkLog{
     position: absolute;
-    display: none;
     width: 10vw;
     height: 10vh;
     right: 7vw;
-    top: 0;
-    
+    top: 0;  
    } 
    #paraLinkLog{
       font-size: 1.5em; 
    }
 #linkLog:hover{
        cursor: pointer;
+   }
+   #linkZaLog{
+    position: absolute;
+    display: none;
+    width: 10vw;
+    height: 10vh;
+    right: 7vw;
+    top: 0;
    }
 #logo{
     position: absolute;
@@ -59,20 +71,18 @@ header h2{
     background-size: cover;
     background-repeat: no-repeat;
 }
-#left{
-    width: 25vw;
-    text-align: center;
-    position: relative;
+#left{ position: relative;
+    display: block;
     float: left;
-    border-right: solid black 1px;
+    width: 100vw;
+    
 }
 #zaPrikaz{
     position: relative;
     float: left;
     display:block;
-    width: 60vw;
+    width: 100vw;
     min-height: 100vh;
-    background-color: aquamarine;
 }
 #otvaranjeNaloga{
     position: relative;
@@ -82,52 +92,25 @@ header h2{
     text-align: center;
     justify-content: center;
 }
-#podaciOKnjigamaKorisnika{
+
+.knjigaUNizu{
     position: relative;
+    float: left;
+    display: block;
+    border: solid green 2px;
+    width: 100vw;
+    height: 60vw;
+    font-size: 1em;
+}
+#zaPrikazLPodataka{
+    position: relative;
+    display: block;
     float: left;
     width: 100vw;
     min-height: 50vh;
     text-align: center;
     justify-content: center;
-    background-color: blueviolet;
 align-content: center;
-}
-#triNizaPodataka{
-    position: relative;
-    float: left;
-    width: 60vw;
-   height: 5vh;
-    background-color: aquamarine;
-text-align: center;
-display: block;
-margin-bottom: 2vh;
-margin-left: 20vw;
-}
-.jedanOdTriNiza{
-    display: inline-block;
-    background-color: antiquewhite;
-    cursor: pointer;
-}
-.knjigaKorisnika{
-    position: relative;
-    float: left;
-    width: 60vw;
-   height: 5vh;
-    background-color: aquamarine;
-text-align: center;
-display: block;
-margin-bottom: 2vh;
-margin-left: 20vw;
-}
-footer{
-    position: relative;
-    float: left;
-    width: 100vw;
-    height: 20vh;
-    background-color: brown;
-}
-#container{
-    
 }
 #zaLogovanje, #registracijaKorisnika,#podaciOKnjigamaKorisnika,#IDsifraKorisnika{
     display: none;
@@ -135,6 +118,54 @@ footer{
     width: 100vw;
     height: 50vh;
 }
+
+#podaciOKnjigamaKorisnika p{
+font-size: 2em
+}
+#triNizaPodataka{
+    position: relative;
+    float: left;
+    width: 100vw;
+text-align: center;
+display: block;
+margin-bottom: 2vh;
+}
+.jedanOdTriNiza{
+    background-color: antiquewhite;
+    cursor: pointer;
+    width: 100vw;
+    height: 7vh;
+    font-size: 2em;
+    border-bottom: solid black 1px
+}
+.knjigaKorisnika{
+    position: relative;
+    float: left;
+    width: 60vw;
+   height: 5vh;
+text-align: center;
+display: block;
+margin-bottom: 2vh;
+margin-left: 20vw;
+}
+footer{
+    position: fixed;
+    display: block;
+    float: left;
+    width: 100vw;
+    height: 5vh;
+    background-color: brown;
+    left: 0;
+    bottom: 0;
+}
+#container{
+    position: relative;
+    display: block;
+    float: left;
+    width: 100vw;
+    min-height: 100vh
+}
+
 #linkRegistracija, #ipakImamNalog{
     cursor: pointer;
     color:#0000EE;
@@ -144,22 +175,61 @@ footer{
     width: 40vw;
     margin-left: 30vw;
     margin-top: 20vh;
-    border: solid red 1px;
+    border: solid brown 1px;
+}
+#podaciOKnjigamaKorisnika{
+    position: relative;
+    float: left;
+    width: 100vw;
+    min-height: 100vh;
+    text-align: center;
+    justify-content: center;
+align-content: center;
+}
+#trazenaKnjiga{
+position: relative;
+width: 50%;
+height: 50%;
+margin-left: 20%;
+font-size: 1em
 }
 .knjigaNaPocetnoj{
     position: relative;
     float: left;
     display: block;
-    width: 50%;
+    width: 100vw;
+    height: 100vw;
     border-bottom: solid black 1px;
     background-color: blanchedalmond;
+    font-size: 2em;
 }
-aside div{
-    cursor: pointer;
-    margin-top: 1vh;
+.knjigaNaPocetnoj img{
+    width: 40%;
+    height: 50%;
 }
+.knjigaNaPocetnoj p{
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    text-align: center
+}
+
 #odabirZanra{
     display:none;
+    width: 100vw;
+    min-height: 60vh;
+    justify-content: center;
+}
+#odabirZanra p{
+    text-align: center;
+    position: relative;
+    float: left;
+    width: 100%;
+    font-size: 1em;
+    cursor: pointer;
+    border-bottom: solid red 1px;
+    background-color: azure
 }
 #prikazKnjigeKrupno{
     position: relative;
@@ -169,10 +239,23 @@ aside div{
 }
 #prikaziProfil{
     display:none;
+    position: relative;
+    float: right
 }
 #unosBibliotekara, #profilBibliotekara,#divPromenaSifre,#unosNoveKnjige,#radSaKorisnicima,#divZaOdabranogKorisnika{
     display: none;
 
+}
+aside div,#prikaziProfil{
+    text-align: center;
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 8vh;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-bottom: solid black 1px;
 }
 .divTrazenogKorisnik{
     background-color: wheat
@@ -182,9 +265,7 @@ aside div{
     width:10vw;
     background-color: wheat
 }
-#rezervisaneKnjige{
-    min-height: 50vh;
-}
+
 .odabranaKnjigaKorisnika{
     border: solid red 3px;
     margin: 2vw;
@@ -291,4 +372,109 @@ input[type='checkbox']:checked {
     #unosNoveKnjige input[type='text']{
         width: 40vw;
     }
+    #left{ width: 25vw;
+    text-align: center;
+    position: relative;
+    float: left;
+    border-right: solid black 1px;
+    }
+    #zaPrikaz{
+        position: relative;
+        float: left;
+        display:block;
+        width: 70vw;
+        min-height: 100vh;
+    }
+    .knjigaNaPocetnoj{
+        position: relative;
+        float: left;
+        display: flex;
+        flex-wrap: wrap;
+        width: 20vw;
+        height: 30vw;
+        border-bottom: solid black 1px;
+        background-color: blanchedalmond;
+        font-size: 1em;
+        margin-right: 3vw;
+    }
+    .knjigaNaPocetnoj img{
+        width: 30%;
+        height: 40%;
+    }
+    .knjigaNaPocetnoj p{
+        position: relative;
+        display: block;
+        text-align: center
+    }
+    .jedanOdTriNiza{
+        background-color: antiquewhite;
+        display: inline;
+        cursor: pointer;
+        width: 20vw;
+        height: 7vh;
+        font-size: 2em;
+        border-bottom: solid black 1px
+    }
+    .knjigaUNizu{
+        position: relative;
+        float: left;
+        display: inline-block;
+        border: solid green 2px;
+        width: 100vw;
+        height: 35vw;
+        font-size: 1em;
+    }
+    #odabirZanra{
+        display:none;
+        width: 25vw;
+        min-height: 100vh;
+        justify-content: center;
+    }
+    #odabirZanra p{
+        text-align: center;
+        position: relative;
+        float: left;
+        width: 100%;
+        font-size: 1em;
+        cursor: pointer;
+        border-bottom: solid red 1px;
+        background-color: azure
+    }
+    #zaPrikazLPodataka{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        float: left;
+        width: 100vw;
+        height: 10vh;
+        text-align: center;
+        justify-content: center;
+    align-content: center;
+
+    border: solid brown 1px;
+    }
+    #zaPrikazLPodataka p{
+        position: relative;
+        display: inline;
+        float: left;
+        width:50vw;
+        height: 10vh;
+    }
+    #dugmeUnosNovogBibliotekara{
+
+    }
+    #unosBibliotekara{
+        position: relative;
+    float: left;
+    width: 100%;
+    min-height: 70vh;
+    margin-top: 10vh;
+    justify-content: center;
+    text-align: center;
+    font-size: 2em;
+    border: solid black 1px;
+    }
+    #unosBibliotekara button,#unosBibliotekara input{
+        height: 7vh;
+     }
 }
